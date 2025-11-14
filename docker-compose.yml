@@ -1,0 +1,14 @@
+services:
+  mqtt-dumper:
+    image: mqtt-dumper:latest
+    environment:
+      - MQTT_BROKER=tcp://mosquitto:1883
+      - MQTT_TOPIC=sensors/#
+      - OUTPUT_BASE_DIR=/app/data
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - mqtt-dumper:/app/data
+    restart: unless-stopped
+
+volumes:
+  mqtt-dumper:

@@ -1,0 +1,21 @@
+# Docker-specific configuration
+mqtt:
+  broker: ${MQTT_BROKER:tcp://mosquitto:1883}
+  client-id: ${MQTT_CLIENT_ID:docker-mqtt-dumper}
+  topic: ${MQTT_TOPIC:sensors/#}
+  qos: ${MQTT_QOS:1}
+  connection-timeout: ${MQTT_CONNECTION_TIMEOUT:30}
+  keep-alive-interval: ${MQTT_KEEP_ALIVE_INTERVAL:60}
+
+output:
+  base-dir: ${OUTPUT_BASE_DIR:/app/data}
+  date-format: ${OUTPUT_DATE_FORMAT:yyyy-MM-dd}
+
+logging:
+  level:
+    org.ahahn.tools.mqtt: INFO
+    org.eclipse.paho: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: /app/data/application.log
