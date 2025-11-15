@@ -41,4 +41,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64  # Fixed: removed linux/arm/v7
           push: true
-          tags: ghcr.io/a-hahn/mqtt-json-dumper:latest
+          tags: ghcr.io/a-hahn/mqtt-dumper:latest

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mqtt-json-dumper
+    name: mqtt-dumper
 
 mqtt:
   broker: ${MQTT_BROKER:tcp://localhost:1883}
