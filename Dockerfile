@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Create data directory with proper permissions
-RUN mkdir -p /app/data && chown -R app:app /app
+RUN mkdir -p /app/mqtt-data && chown -R app:app /app
 
 # Health check (optional - if you add Spring Boot Actuator)
 # HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \

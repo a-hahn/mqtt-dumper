@@ -12,12 +12,24 @@ Simple MQTT Dumper for logging mqtt json content to files
 - Graceful Shutdown - Proper resource cleanup
 - Connection Management - Automatic reconnection
 
+# Run from the latest package
+
+```bash
+sudo docker run -d   \
+  -e MQTT_BROKER=tcp://yourmqttbroker:1883 \
+  -e MQTT_TOPIC=sensors/# 
+  -e SPRING_PROFILES_ACTIVE=docker \ 
+  --name mqtt-dumper \
+  ghcr.io/a-hahn/mqtt-dumper:latest
+```
+
 # Run with default variables
 java -jar build/libs/mqtt-dumper.jar
 
-# Or run with specific environment variables overriding the settings in application.yaml
+# Run local and override environment variables in application.yaml
 MQTT_BROKER=tcp://localhost:1883 MQTT_TOPIC=sensors/# java -jar build/libs/mqtt-dumper.jar
 
+# File structure
 ```text
 mqtt-data/
 ├── 2024-01-15/
@@ -35,17 +47,15 @@ mqtt-data/
 ```bash
 # Build and test locally
 docker build -t mqtt-dumper .
-docker run -it --rm \
-  -e MQTT_BROKER=tcp://localhost:1883 \
-  -e MQTT_TOPIC=sensors/# \
-  -v $(pwd)/data:/app/data \
-  mqtt-dumper
+sudo docker run -d   -e MQTT_BROKER=tcp://yourmqttbroker:1883   -e MQTT_TOPIC=sensors/# -e SPRING_PROFILES_ACTIVE=docker -v mqtt-data:/app/mqtt-data  --name mqtt-dumper mqtt-dumper
+```
 
+
+```
 # Or use docker-compose
 docker compose up
 ```
 
-# Run with docker
-```bash
-docker run -it --rm   -e MQTT_BROKER=tcp://yourmqttbroker:1883   -e MQTT_TOPIC=sensors/#   -v $(pwd)/data:/app/data   mqtt-dumper
-```
+When using docker compose you might want to create a ``docker-compose.override.yml`` to override the default values
+
+

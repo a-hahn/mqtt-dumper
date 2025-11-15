@@ -8,7 +8,7 @@ mqtt:
   keep-alive-interval: ${MQTT_KEEP_ALIVE_INTERVAL:60}
 
 output:
-  base-dir: ${OUTPUT_BASE_DIR:/app/data}
+  base-dir: ${OUTPUT_BASE_DIR:/app/mqtt-data}
   date-format: ${OUTPUT_DATE_FORMAT:yyyy-MM-dd}
 
 logging:

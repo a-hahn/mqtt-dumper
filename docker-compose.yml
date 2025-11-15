@@ -1,14 +1,15 @@
 services:
   mqtt-dumper:
-    image: mqtt-dumper:latest
+    # image: mqtt-dumper:latest # for local image
+    image: ghcr.io/a-hahn/mqtt-dumper:latest
     environment:
-      - MQTT_BROKER=tcp://mosquitto:1883
-      - MQTT_TOPIC=sensors/#
-      - OUTPUT_BASE_DIR=/app/data
+      - MQTT_BROKER=tcp://mosquitto:1883 # modify
+      - MQTT_TOPIC=sensors/# # modify
+      - OUTPUT_BASE_DIR=/app/mqtt-data
       - SPRING_PROFILES_ACTIVE=docker
     volumes:
-      - mqtt-dumper:/app/data
+      - mqtt-data:/app/mqtt-data
     restart: unless-stopped
 
 volumes:
-  mqtt-dumper:
+  mqtt-data:
