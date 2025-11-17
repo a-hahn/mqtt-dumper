@@ -15,8 +15,9 @@ Simple MQTT Dumper for logging mqtt json content to files
 # Run from the latest package
 
 ```bash
-sudo docker run -it --rm  \
+sudo docker run -d  \
 --name mqtt-dumper \
+--retart always \
 -e MQTT_BROKER=tcp://yourmqttbroker:1883 \
 -e MQTT_TOPIC=sensors/# \
 -e SPRING_PROFILES_ACTIVE=docker \ 

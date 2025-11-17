@@ -21,7 +21,6 @@ public class FileWriterService {
     public void writeMessage(String topic, String payload) {
         try {
             TopicFileWriter writer = topicWriters.computeIfAbsent(topic, this::createTopicWriter);
-            writer.setConfig(config);
             writer.writeMessage(payload);
         } catch (Exception e) {
             logger.error("Error writing message for topic {}: {}", topic, e.getMessage(), e);
@@ -29,7 +28,7 @@ public class FileWriterService {
     }
 
     private TopicFileWriter createTopicWriter(String topic) {
-        return new TopicFileWriter(topic);
+        return new TopicFileWriter(topic, config);
     }
 
     public void shutdown() {

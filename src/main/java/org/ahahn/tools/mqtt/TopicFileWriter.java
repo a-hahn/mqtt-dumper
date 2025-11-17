@@ -18,22 +18,25 @@ public class TopicFileWriter {
 
     private final String topic;
     private final String safeTopicName;
+    private final FileOutputConfig config;
     private BufferedWriter writer;
     private String currentDate;
     private long messageCount = 0;
     private boolean firstMessage = true;
-    private FileOutputConfig config;
     private DateTimeFormatter dateFormatter;
 
-    public TopicFileWriter(String topic) {
+    public TopicFileWriter(String topic, FileOutputConfig config) {
         this.topic = topic;
         this.safeTopicName = topic.replaceAll("[^a-zA-Z0-9.-]", "_");
-        this.currentDate = getCurrentDate();
+        this.config = config;
         initializeWriter();
     }
 
     private void initializeWriter() {
         try {
+            this.dateFormatter = DateTimeFormatter.ofPattern(config.getDateFormat());
+            this.currentDate = getCurrentDate();
+
             String dateDir = currentDate;
             Path dirPath = Paths.get(config.getBaseDir(), dateDir);
             Files.createDirectories(dirPath);
@@ -132,10 +135,5 @@ public class TopicFileWriter {
 
     private String getCurrentDate() {
         return LocalDate.now().format(dateFormatter);
-    }
-
-    public void setConfig(FileOutputConfig config) {
-        this.config = config;
-        this.dateFormatter = DateTimeFormatter.ofPattern(config.getDateFormat());
     }
 }
