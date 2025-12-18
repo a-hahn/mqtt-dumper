@@ -17,10 +17,10 @@ Simple MQTT Dumper for logging mqtt json content to files
 ```bash
 sudo docker run -d  \
 --name mqtt-dumper \
---retart always \
--e MQTT_BROKER=tcp://yourmqttbroker:1883 \
--e MQTT_TOPIC=sensors/# \
--e SPRING_PROFILES_ACTIVE=docker \ 
+--restart always \
+-e MQTT_BROKER=tcp://192.168.2.4:1883 \
+-e MQTT_TOPIC=owntracks/# \
+-e SPRING_PROFILES_ACTIVE=docker \
 -v mqtt-data:/app/mqtt-data \
 ghcr.io/a-hahn/mqtt-dumper:latest
 ```
